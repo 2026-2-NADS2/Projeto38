@@ -1,8 +1,3 @@
-```sh
-Utilize o site <https://www.toptal.com/developers/gitignore> para gerar seu arquivo gitignore e apague este campo.
-
-Vide tutoriais do PI.
-```
 
 # FECAP - Fundação de Comércio Álvares Penteado
 
@@ -60,8 +55,6 @@ Há também 4 pastas que seguem da seguinte forma:
 
 <b>src</b>: Pasta que contém o código fonte.
 
-## 🛠 Instalação
-
 
 ## 💻 Configuração para Desenvolvimento
 
@@ -69,9 +62,6 @@ Para desenvolver o projeto KFKA, é necessário utilizar as ferramentas e tecnol
 
 As instruções de instalação das dependências e execução do projeto serão adicionadas conforme a implementação do sistema.
 
-
-## 📋 Licença/License
-Utilize o link <https://chooser-beta.creativecommons.org/> para fazer uma licença CC BY 4.0.
 
 ## 🎓 Referências
 
