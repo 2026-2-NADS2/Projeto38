@@ -12,6 +12,10 @@ Vide tutoriais do PI.
 
 # KFKA – Plataforma de Acompanhamento Escolar
 
+<p align="center">
+  <img src="imagem/kfka.jpg" alt="Logo KFKA" width="300">
+</p>
+
 ## AlphaTech
 
 ## Integrantes: <a href="https://www.linkedin.com/in/igor-ara%C3%BAjo-b1719129b/"> Igor Araujo</a>, <a href="https://www.linkedin.com/in/matheus-l-19385b298">Matheus Teixeira</a>, <a href="https://www.linkedin.com/in/daniel-c%C3%A2mara-freitas-796772393/">Daniel Camara</a>, <a href="https://www.linkedin.com/in/enzo-lemos-5333963ab/">Enzo Lemos</a>
