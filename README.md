@@ -13,7 +13,7 @@ Vide tutoriais do PI.
 # KFKA – Plataforma de Acompanhamento Escolar
 
 <p align="center">
-  <img src="imagem/kfka.jpg" alt="Logo KFKA" width="300">
+  <img src="imagens/kfka.jpg" alt="Logo KFKA" width="300">
 </p>
 
 ## AlphaTech
