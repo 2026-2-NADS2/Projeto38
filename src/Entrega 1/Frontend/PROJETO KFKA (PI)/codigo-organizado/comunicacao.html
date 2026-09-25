@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunicação — KFKA</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/background.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="logo"><span class="logo-mark">[K]</span> KFKA</div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html">📊 Painel</a>
+      <a href="notas-faltas.html">📝 Notas e Faltas</a>
+      <a href="comunicacao.html" class="active">💬 Comunicação</a>
+    </nav>
+    <div class="sidebar-user">
+      Logado como<br>
+      <strong id="nome-usuario">Professor(a)</strong><br>
+      <a href="index.html" style="color:var(--cyan);">Sair</a>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <div class="app-topbar">
+      <div>
+        <h1>Comunicação</h1>
+        <p>Converse diretamente com responsáveis e a coordenação.</p>
+      </div>
+    </div>
+
+    <div class="chat-shell">
+      <div class="chat-list" id="chat-list"></div>
+      <div class="chat-window" id="chat-window">
+        <p style="color:var(--text-secondary); margin:auto;">Selecione uma conversa ao lado.</p>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script src="js/dados-mock.js"></script>
+<script src="js/comunicacao.js"></script>
+
+</body>
+</html>
