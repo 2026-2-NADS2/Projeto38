@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar — KFKA</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/background.css">
+</head>
+<body>
+
+<div class="auth-shell">
+
+  <div class="auth-side reveal">
+    <div class="logo" style="margin-bottom:var(--space-lg); font-size:1.4rem;">
+      <span class="logo-mark">[K]</span> KFKA
+    </div>
+    <h1 style="font-size:2.2rem; line-height:1.2; margin-bottom:var(--space-sm);">
+      Acompanhamento escolar mais simples, <span class="text-gradient">seguro e conectado</span>.
+    </h1>
+    <p style="color:var(--text-secondary); max-width:38ch;">
+      Professores, escola e responsáveis em um único ambiente.
+    </p>
+    <div class="hero-badges">
+      <div>🛡️ Dados protegidos</div>
+      <div>🔑 Acesso por permissão</div>
+      <div>🔒 Ambiente seguro</div>
+    </div>
+  </div>
+
+  <div class="auth-side">
+    <div class="auth-card reveal reveal-delay-1">
+      <div class="logo" style="justify-content:center; margin-bottom:var(--space-sm);">
+        <span class="logo-mark">[K]</span> KFKA
+      </div>
+      <h2 style="text-align:center; margin-bottom:0.3rem;">Bem-vindo(a)!</h2>
+      <p style="text-align:center; color:var(--text-secondary); margin-bottom:var(--space-md); font-size:0.9rem;">
+        Acesse sua conta para continuar.
+      </p>
+
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="usuario">Usuário ou e-mail</label>
+          <div class="input-wrap">
+            <span>👤</span>
+            <input type="text" id="usuario" placeholder="Digite seu usuário ou e-mail">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <div class="input-wrap">
+            <span>🔒</span>
+            <input type="password" id="senha" placeholder="Digite sua senha">
+            <span id="toggle-senha" style="cursor:pointer;">👁️</span>
+          </div>
+        </div>
+
+        <p class="error-msg" id="error-msg"></p>
+
+        <div class="field-row">
+          <label style="display:flex; align-items:center; gap:0.4rem; color:var(--text-secondary);">
+            <input type="checkbox" id="lembrar"> Lembrar de mim
+          </label>
+          <a href="#" style="color:var(--cyan);">Esqueceu sua senha?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+      </form>
+
+      <p style="text-align:center; color:var(--text-muted); font-size:0.85rem; margin-top:var(--space-md);">
+        Ainda não tem uma conta? <a href="#" style="color:var(--cyan);">Fale com a escola</a>
+      </p>
+      <p style="text-align:center; color:var(--text-muted); font-size:0.75rem; margin-top:var(--space-sm);">
+        🔒 Sua informação está protegida.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>

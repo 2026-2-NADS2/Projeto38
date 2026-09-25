@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+  .site-header {
+    flex-wrap: wrap;
+    row-gap: 0.75rem;
+  }
+
+  .nav-links {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+    gap: clamp(0.8rem, 5vw, 1.5rem);
+    font-size: 0.9rem;
+  }
+
+  .site-header > .btn {
+    padding: 0.6rem 1rem;
+  }
+}

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar — KFKA</title><style>
+/* ==========================================================
+   KFKA — style.css
+   Estilos globais: reset, variáveis, tipografia, layout base
+   ========================================================== */
+
+:root {
+  /* Cores */
+  --bg-primary: #05070d;
+  --bg-panel: #0d1220;
+  --bg-panel-alt: #10182b;
+  --border-subtle: #1e2740;
+
+  --blue: #3b6fd6;
+  --cyan: #22c9e0;
+  --gradient-accent: linear-gradient(90deg, var(--blue), var(--cyan));
+
+  --text-primary: #f2f4f8;
+  --text-secondary: #9aa4bd;
+  --text-muted: #5b647c;
+
+  /* Tipografia */
+  --font-base: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+
+  /* Espaçamento */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Layout */
+  --radius: 10px;
+  --max-width: 1200px;
+}
+
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-base);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; }
+
+button, input { font-family: inherit; }
+
+/* Layout utilitário */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Cabeçalho / navegação */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+
+.logo-mark {
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-lg);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.nav-links a:hover { color: var(--text-primary); }
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--gradient-accent);
+  color: #04101a;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(34, 201, 224, 0.25);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.btn-ghost:hover { border-color: var(--cyan); }
+
+.btn-block { width: 100%; }
+
+/* Responsividade base */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  :root { --space-xl: 2.5rem; --space-lg: 1.75rem; }
+}
+/* ==========================================================
+   KFKA — components.css
+   Componentes reutilizáveis entre páginas
+   ========================================================== */
+
+/* Hero da Home */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-xl);
+  align-items: center;
+  padding: var(--space-xl) 0;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  margin-bottom: var(--space-sm);
+}
+
+.hero p {
+  color: var(--text-secondary);
+  max-width: 40ch;
+  margin-bottom: var(--space-md);
+}
+
+.hero-actions { display: flex; gap: var(--space-sm); }
+
+.hero-badges {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.hero-badges div { display: flex; align-items: center; gap: 0.4rem; }
+
+/* Card de funcionalidade */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-xl) 0;
+}
+
+.feature-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.feature-card .icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto var(--space-sm);
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #04101a;
+}
+
+.feature-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+.feature-card p { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Faixa "como funciona" */
+.flow-strip {
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--space-lg) 0;
+  text-align: center;
+}
+
+.flow-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.flow-steps span.sep { color: var(--cyan); }
+
+/* Painel de login (usado em login.html) */
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.auth-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-xl);
+}
+
+.auth-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+}
+
+.field { margin-bottom: var(--space-md); }
+
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-secondary);
+}
+
+.field .input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+}
+
+.field .input-wrap:focus-within { border-color: var(--cyan); }
+
+.field input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.field input::placeholder { color: var(--text-muted); }
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: var(--space-md);
+}
+
+.error-msg {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: var(--space-sm);
+  min-height: 1.2em;
+}
+
+/* Rodapé */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-lg) 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; text-align: left; }
+  .feature-grid { grid-template-columns: 1fr 1fr; }
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-side:first-child { display: none; }
+}
+
+@media (max-width: 560px) {
+  .feature-grid { grid-template-columns: 1fr; }
+  .hero-badges { flex-direction: column; gap: var(--space-xs); }
+}
+/* ==========================================================
+   KFKA — background.css
+   Glow de fundo, corte diagonal, textura e animações
+   ========================================================== */
+
+/* Camada de fundo fixa: glow azul inferior-esquerdo + corte
+   diagonal ciano no canto superior-direito, como no protótipo */
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  bottom: -25vw;
+  left: -15vw;
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  background: radial-gradient(circle, rgba(59, 111, 214, 0.35) 0%, rgba(34, 201, 224, 0.12) 45%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-pulse 8s ease-in-out infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 260px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(135deg, transparent 49.3%, rgba(34, 201, 224, 0.55) 49.3%, rgba(34, 201, 224, 0.55) 50%, transparent 50.2%);
+  opacity: 0.6;
+}
+
+/* Todo conteúdo real fica acima da camada de fundo */
+.site-header, main, footer, .app-shell, .auth-shell {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+/* Textura de pontos, usada em seções escuras (ex: faixa "como funciona") */
+.dot-texture {
+  background-image: radial-gradient(rgba(154, 164, 189, 0.18) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Animação de entrada — um único momento orquestrado ao carregar a página */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  animation: fade-in-up 0.7s ease-out both;
+}
+
+.reveal-delay-1 { animation-delay: 0.12s; }
+.reveal-delay-2 { animation-delay: 0.24s; }
+.reveal-delay-3 { animation-delay: 0.36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-delay-1, .reveal-delay-2, .reveal-delay-3 { animation: none; }
+  body::before { animation: none; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="auth-shell">
+
+  <div class="auth-side reveal">
+    <div class="logo" style="margin-bottom:var(--space-lg); font-size:1.4rem;">
+      <span class="logo-mark">[K]</span> KFKA
+    </div>
+    <h1 style="font-size:2.2rem; line-height:1.2; margin-bottom:var(--space-sm);">
+      Acompanhamento escolar mais simples, <span class="text-gradient">seguro e conectado</span>.
+    </h1>
+    <p style="color:var(--text-secondary); max-width:38ch;">
+      Professores, escola e responsáveis em um único ambiente.
+    </p>
+    <div class="hero-badges">
+      <div>🛡️ Dados protegidos</div>
+      <div>🔑 Acesso por permissão</div>
+      <div>🔒 Ambiente seguro</div>
+    </div>
+  </div>
+
+  <div class="auth-side">
+    <div class="auth-card reveal reveal-delay-1">
+      <div class="logo" style="justify-content:center; margin-bottom:var(--space-sm);">
+        <span class="logo-mark">[K]</span> KFKA
+      </div>
+      <h2 style="text-align:center; margin-bottom:0.3rem;">Bem-vindo(a)!</h2>
+      <p style="text-align:center; color:var(--text-secondary); margin-bottom:var(--space-md); font-size:0.9rem;">
+        Acesse sua conta para continuar.
+      </p>
+
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="usuario">Usuário ou e-mail</label>
+          <div class="input-wrap">
+            <span>👤</span>
+            <input type="text" id="usuario" placeholder="Digite seu usuário ou e-mail">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="senha">Senha</label>
+          <div class="input-wrap">
+            <span>🔒</span>
+            <input type="password" id="senha" placeholder="Digite sua senha">
+            <span id="toggle-senha" style="cursor:pointer;">👁️</span>
+          </div>
+        </div>
+
+        <p class="error-msg" id="error-msg"></p>
+
+        <div class="field-row">
+          <label style="display:flex; align-items:center; gap:0.4rem; color:var(--text-secondary);">
+            <input type="checkbox" id="lembrar"> Lembrar de mim
+          </label>
+          <a href="#" style="color:var(--cyan);">Esqueceu sua senha?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+      </form>
+
+      <p style="text-align:center; color:var(--text-muted); font-size:0.85rem; margin-top:var(--space-md);">
+        Ainda não tem uma conta? <a href="#" style="color:var(--cyan);">Fale com a escola</a>
+      </p>
+      <p style="text-align:center; color:var(--text-muted); font-size:0.75rem; margin-top:var(--space-sm);">
+        🔒 Sua informação está protegida.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// login.js — validação simples + redirecionamento simulado
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('login-form');
+  const usuario = document.getElementById('usuario');
+  const senha = document.getElementById('senha');
+  const errorMsg = document.getElementById('error-msg');
+  const toggleSenha = document.getElementById('toggle-senha');
+
+  // Mostrar/ocultar senha
+  toggleSenha.addEventListener('click', () => {
+    const isPassword = senha.type === 'password';
+    senha.type = isPassword ? 'text' : 'password';
+    toggleSenha.textContent = isPassword ? '🙈' : '👁️';
+  });
+
+  // Validação simples (sem back-end real)
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    errorMsg.textContent = '';
+
+    if (!usuario.value.trim() || !senha.value.trim()) {
+      errorMsg.textContent = 'Preencha usuário/e-mail e senha para continuar.';
+      return;
+    }
+
+    if (senha.value.trim().length < 4) {
+      errorMsg.textContent = 'A senha deve ter pelo menos 4 caracteres.';
+      return;
+    }
+
+    // Simula sessão do usuário logado
+    localStorage.setItem('kfka_usuario', usuario.value.trim());
+
+    window.location.href = 'dashboard.html';
+  });
+});
+
+</script>
+
+</body>
+</html>
