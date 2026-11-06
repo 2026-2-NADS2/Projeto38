@@ -9,7 +9,6 @@
 -- Pelo Workbench: abra e execute este arquivo inteiro depois dos outros dois.
 -- =====================================================================
 USE kfka;
-
 -- ---------------------------------------------------------------------
 -- 1. Sessões revogáveis (RNF02)
 --    O token JWT guarda a "versão da sessão". Trocar/redefinir a senha,
@@ -26,6 +25,8 @@ CREATE TABLE sessao_encerrada (
     expira_em  DATETIME NOT NULL,
     CONSTRAINT fk_se_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
+
+
 CREATE INDEX idx_se_expira ON sessao_encerrada (expira_em);
 
 -- ---------------------------------------------------------------------
@@ -36,6 +37,8 @@ CREATE INDEX idx_se_expira ON sessao_encerrada (expira_em);
 --    Sem FK para usuario de propósito: o registro precisa sobreviver
 --    a qualquer mudança no cadastro (o nome fica copiado).
 -- ---------------------------------------------------------------------
+
+
 CREATE TABLE auditoria (
     id           BIGINT AUTO_INCREMENT PRIMARY KEY,
     data_hora    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -49,6 +52,8 @@ CREATE TABLE auditoria (
     detalhes     JSON NULL,
     ip           VARCHAR(45) NULL
 );
+
+
 CREATE INDEX idx_aud_data     ON auditoria (data_hora);
 CREATE INDEX idx_aud_entidade ON auditoria (entidade, entidade_id);
 CREATE INDEX idx_aud_usuario  ON auditoria (usuario_id, data_hora);
@@ -71,6 +76,7 @@ BEGIN
 END$$
 DELIMITER ;
 
+
 -- ---------------------------------------------------------------------
 -- 3. Índices para os relatórios gerenciais (RNF05)
 --    Os relatórios filtram por bimestre (com ou sem status) sem informar
@@ -78,9 +84,12 @@ DELIMITER ;
 --    A ciência é procurada por acompanhamento (PK) e por data nos retornos.
 --    A lista de alunos é paginada por nome dentro da situação (ativo).
 -- ---------------------------------------------------------------------
+
 CREATE INDEX idx_acomp_bim_status ON acompanhamento (bimestre_id, status);
 CREATE INDEX idx_ciencia_data     ON ciencia_responsavel (data_ciencia);
 CREATE INDEX idx_aluno_ativo_nome ON aluno (ativo, nome);
+
+
 
 -- ---------------------------------------------------------------------
 -- 4. Solicitações sobre dados pessoais (RNF03 — LGPD art. 18)
