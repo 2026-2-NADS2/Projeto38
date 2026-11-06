@@ -20,10 +20,13 @@ CREATE USER IF NOT EXISTS 'kfka_app'@'%' IDENTIFIED BY 'TROQUE_ESTA_SENHA';
 -- Leitura e gravação de dados em todas as tabelas e views do banco kfka
 GRANT SELECT, INSERT, UPDATE, DELETE ON kfka.* TO 'kfka_app'@'%';
 
+
+
 -- A trilha de auditoria é somente-inclusão: além dos triggers trg_auditoria_bu/bd
 -- (que recusam UPDATE e DELETE para qualquer usuário), o ideal é nem conceder
 -- esses privilégios na tabela. O MySQL não permite REVOKE de uma tabela quando o
 -- GRANT foi no banco inteiro; por isso a proteção efetiva fica nos triggers.
+
 
 FLUSH PRIVILEGES;
 
