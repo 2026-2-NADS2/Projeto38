@@ -1,0 +1,186 @@
+/* ==========================================================
+   KFKA — style.css
+   Estilos globais: reset, variáveis, tipografia, layout base
+   ========================================================== */
+
+:root {
+  /* Cores */
+  --bg-primary: #05070d;
+  --bg-panel: #0d1220;
+  --bg-panel-alt: #10182b;
+  --border-subtle: #1e2740;
+
+  --blue: #3b6fd6;
+  --cyan: #22c9e0;
+  --gradient-accent: linear-gradient(90deg, var(--blue), var(--cyan));
+
+  --text-primary: #f2f4f8;
+  --text-secondary: #9aa4bd;
+  /* Antes #5b647c: abaixo do contraste mínimo da WCAG (4,5:1) para texto pequeno */
+  --text-muted: #8690a8;
+
+  /* Cores de estado (sempre acompanhadas de texto ou ícone — nunca só a cor) */
+  --perigo: #f87171;
+  --aviso: #fbbf24;
+  --sucesso: #34d399;
+  --sobre-destaque: #04101a;     /* texto sobre o gradiente azul */
+  --cyan-rgb: 34 201 224;
+  --perigo-rgb: 248 113 113;
+  --aviso-rgb: 251 191 36;
+  --neutro-rgb: 154 164 189;
+  --sucesso-rgb: 52 211 153;
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+  /* Tipografia */
+  --font-base: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+
+  /* Espaçamento */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Layout */
+  --radius: 10px;
+  --max-width: 1200px;
+
+  /* Movimento — curvas fortes (as nativas do CSS são fracas demais) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);      /* entradas, saídas, feedback */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);  /* algo que se move na tela */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);   /* menu lateral (curva estilo iOS) */
+  --dur-press: 160ms;
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+
+  /* Controles nativos (select, scrollbar, autofill) no tema escuro */
+  color-scheme: dark;
+}
+
+::selection { background: rgb(var(--cyan-rgb) / 0.3); color: var(--text-primary); }
+
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  font-family: var(--font-base);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; }
+
+button, input, select, textarea { font-family: inherit; }
+
+/* Números alinhados em colunas (notas, faltas, contadores) */
+.num, td, .stat-card .value { font-variant-numeric: tabular-nums; }
+
+/* Layout utilitário */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Cabeçalho / navegação */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+
+.logo-mark {
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-lg);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.nav-links a { transition: color var(--dur-fast) ease; }
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-links a:hover { color: var(--text-primary); }
+}
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  user-select: none;
+  /* Propriedades explícitas, nunca "all" */
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    box-shadow var(--dur-base) ease,
+    border-color var(--dur-fast) ease,
+    background-color var(--dur-fast) ease,
+    opacity var(--dur-fast) ease;
+}
+
+/* Feedback de clique: o botão "afunda" — a interface mostra que ouviu */
+.btn:active:not(:disabled) { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--gradient-accent);
+  color: var(--sobre-destaque);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+/* Hover só onde existe mouse — no toque, o hover "gruda" após o tap */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover:not(:disabled) { box-shadow: 0 8px 24px rgb(var(--cyan-rgb) / 0.25); }
+  .btn-ghost:hover:not(:disabled) { border-color: var(--cyan); }
+}
+
+.btn-block { width: 100%; }
+
+/* Responsividade base */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  :root { --space-xl: 2.5rem; --space-lg: 1.75rem; }
+}

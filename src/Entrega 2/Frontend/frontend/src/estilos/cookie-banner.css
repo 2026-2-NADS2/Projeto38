@@ -1,0 +1,64 @@
+/* ==========================================================
+   KFKA — cookie-banner.css
+   Banner de consentimento de cookies (LGPD)
+   ========================================================== */
+
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-sm) var(--space-md);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
+  padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom));
+  transition: transform 400ms var(--ease-out), opacity 400ms var(--ease-out),
+              display 400ms allow-discrete;
+}
+
+.cookie-banner.visivel { display: flex; }
+@starting-style {
+  .cookie-banner.visivel { transform: translateY(100%); opacity: 0; }
+}
+/* Sai mais rápido do que entra */
+.cookie-banner.saindo { transform: translateY(100%); opacity: 0; transition-duration: 200ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  @starting-style { .cookie-banner.visivel { transform: none; } }
+  .cookie-banner.saindo { transform: none; }
+}
+
+.cookie-banner p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  max-width: 60ch;
+  margin: 0;
+}
+
+.cookie-banner a {
+  color: var(--cyan);
+  text-decoration: underline;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.cookie-actions .btn {
+  padding: 0.55rem 1.2rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 560px) {
+  .cookie-banner { flex-direction: column; align-items: stretch; text-align: center; }
+  .cookie-actions { justify-content: center; }
+}

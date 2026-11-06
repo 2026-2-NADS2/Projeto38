@@ -1,0 +1,38 @@
+/* ==========================================================
+   KFKA — react.css
+   Ajustes pequenos da versão React (os demais estilos vêm dos
+   arquivos da Entrega 1, reaproveitados sem mudança de visual)
+   ========================================================== */
+
+#raiz { min-height: 100vh; }
+
+/* Botão com cara de link (ex.: "Sair") */
+.link-botao {
+  background: none; border: none; padding: 0; font: inherit; color: var(--cyan);
+  cursor: pointer; text-decoration: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .link-botao:hover { text-decoration: underline; }
+}
+
+/* Tela inteira centralizada (ex.: verificando sessão) */
+.tela-cheia { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+/* Página de privacidade */
+.pagina-texto { max-width: 760px; margin: 0 auto; padding: var(--space-lg) var(--space-md); line-height: 1.7; }
+.pagina-texto h1 { font-size: 1.8rem; margin: var(--space-md) 0 var(--space-sm); }
+.pagina-texto h2 { font-size: 1.1rem; margin: var(--space-md) 0 0.4rem; }
+.pagina-texto p, .pagina-texto li { color: var(--text-secondary); }
+.pagina-texto ul { list-style: disc; padding-left: 1.4rem; }
+
+.logo-centro { justify-content: center; margin-bottom: var(--space-sm); }
+
+/* Cartão que sai da fila de revisão (publicado/devolvido): fade curto */
+.cartao { transition: opacity 150ms ease-out; }
+.cartao-saindo { opacity: 0; pointer-events: none; }
+
+/* Fundo escuro do menu: só existe no celular (no desktop não pode ocupar uma coluna da grade) */
+.menu-fundo { display: none; }
+@media (max-width: 900px) {
+  .menu-fundo { display: block; }
+}

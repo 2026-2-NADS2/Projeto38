@@ -1,0 +1,640 @@
+/* ==========================================================
+   KFKA — app.css
+   Estilos das telas internas (dashboard, notas, comunicação)
+   ========================================================== */
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border-subtle);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .logo { margin-bottom: var(--space-lg); }
+
+.sidebar-nav { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; }
+
+.sidebar-nav a {
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  /* Navegação usada dezenas de vezes por dia: só cor, rápido */
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sidebar-nav a:hover { background: var(--bg-panel-alt); color: var(--text-primary); }
+}
+
+.sidebar-nav a.active {
+  background: var(--bg-panel-alt);
+  color: var(--text-primary);
+  border-left: 3px solid var(--cyan);
+}
+
+.sidebar-user {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: var(--space-sm);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.app-main { padding: var(--space-lg); }
+
+.app-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.app-topbar h1 { font-size: 1.4rem; }
+.app-topbar p { color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Cartões de resumo (dashboard) */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.stat-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  display: block;
+  color: inherit;
+}
+
+/* Só cartões clicáveis (links) reagem ao mouse — cartão estático que "levanta"
+   promete uma ação que não existe */
+a.stat-card {
+  transition: border-color var(--dur-fast) ease, transform var(--dur-press) var(--ease-out);
+}
+a.stat-card:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  a.stat-card:hover { border-color: var(--cyan); }
+}
+.stat-card .acao { display: block; margin-top: 0.6rem; font-size: 0.78rem; color: var(--cyan); }
+
+.stat-card .value {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.stat-card .label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+/* Tabela de notas/faltas */
+.table-wrap {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+
+th, td {
+  text-align: left;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+}
+
+th { color: var(--text-secondary); font-weight: 600; font-size: 0.8rem; }
+
+tr:last-child td { border-bottom: none; }
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-ok { background: rgb(var(--cyan-rgb) / 0.15); color: var(--cyan); }
+.badge-pending { background: rgb(var(--perigo-rgb) / 0.15); color: var(--perigo); }
+
+/* Comunicação */
+.chat-shell {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.chat-list { border-right: 1px solid var(--border-subtle); }
+
+.chat-item {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+}
+
+.chat-item { transition: background-color var(--dur-fast) ease; }
+@media (hover: hover) and (pointer: fine) {
+  .chat-item:hover { background: var(--bg-panel-alt); }
+}
+.chat-item.active { background: var(--bg-panel-alt); border-left: 3px solid var(--cyan); }
+
+.chat-item .nome { font-weight: 600; font-size: 0.9rem; }
+.chat-item .preview {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+}
+
+.chat-window .msg {
+  background: var(--bg-panel-alt);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: var(--space-sm);
+  max-width: 70%;
+  font-size: 0.9rem;
+}
+
+.chat-window .msg.mine {
+  margin-left: auto;
+  background: var(--gradient-accent);
+  color: var(--sobre-destaque);
+}
+
+
+
+/* ==========================================================
+   Entrega 2 — estados da interface, componentes novos e mobile
+   ========================================================== */
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+[hidden] { display: none !important; }
+
+.texto-secundario { color: var(--text-secondary); font-size: 0.85rem; }
+.secao-titulo { font-size: 1rem; margin-bottom: var(--space-sm); color: var(--text-secondary); }
+.link-tabela:hover { color: var(--cyan); text-decoration: underline; }
+
+/* Foco visível para navegação por teclado */
+a:focus-visible, button:focus-visible, select:focus-visible,
+input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* Carregando / erro / vazio */
+.estado {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.6rem; padding: var(--space-lg) var(--space-md);
+  color: var(--text-secondary); text-align: center; font-size: 0.9rem;
+}
+.estado[role="status"] {
+  flex-direction: row;
+  /* Se a API responder em menos de 150 ms, o usuário nem vê o carregando (sem piscar) */
+  animation: fade-in 200ms ease 150ms both;
+}
+.estado-erro p { color: var(--perigo); }
+td.td-estado { padding: 0; }
+
+/* Esqueleto: a forma do conteúdo aparece antes dos dados — sem pulo de layout */
+.esqueleto td { padding: 1rem; }
+.osso {
+  display: block; height: 0.8rem; border-radius: 6px;
+  background: var(--bg-panel-alt);
+  animation: fade-in 200ms ease 150ms both, pulsar 1.4s ease-in-out 350ms infinite;
+}
+.stat-card.esqueleto .osso { height: 1.8rem; width: 40%; margin-bottom: 0.6rem; }
+.stat-card.esqueleto .osso + .osso { height: 0.7rem; width: 75%; }
+@keyframes pulsar { 50% { opacity: 0.45; } }
+
+.spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--border-subtle); border-top-color: var(--cyan);
+  /* Girar rápido faz o carregamento PARECER mais rápido */
+  animation: girar 600ms linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* Mensagens rápidas (toast) */
+#toast-area {
+  position: fixed; right: var(--space-md); bottom: var(--space-md);
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;
+  z-index: 1000; pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  background: var(--bg-panel-alt); border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--cyan); border-radius: 10px;
+  padding: 0.75rem 1rem; font-size: 0.88rem; max-width: 340px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  /* Transição (não keyframes): vários toasts seguidos se reajustam sem reiniciar */
+  transition: transform 400ms var(--ease-out), opacity 400ms var(--ease-out);
+}
+/* Entra e sai pela mesma direção (de baixo) — consistência espacial */
+@starting-style {
+  .toast { opacity: 0; transform: translateY(100%); }
+}
+.toast.saindo {
+  opacity: 0;
+  transform: translateY(100%);
+  transition-duration: 200ms; /* o sistema responde rápido ao sair */
+}
+.toast-erro { border-left-color: var(--perigo); }
+
+/* Badges extras */
+.badge-warn { background: rgb(var(--aviso-rgb) / 0.15); color: var(--aviso); }
+.badge-neutral { background: rgb(var(--neutro-rgb) / 0.12); color: var(--text-secondary); }
+
+.stat-destaque { border-color: rgb(var(--cyan-rgb) / 0.5); }
+
+/* Botões e campos */
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+
+/* Troca de texto do botão (Salvar -> Salvando... -> Salvo ✓): um leve blur
+   funde os dois estados, em vez de mostrar duas palavras se trocando */
+.btn .rotulo { transition: filter var(--dur-base) ease, opacity var(--dur-base) ease; }
+.btn.trocando .rotulo { filter: blur(2px); opacity: 0.6; }
+.btn.sucesso { border-color: rgb(var(--cyan-rgb) / 0.6); color: var(--cyan); }
+
+.select, .dialogo textarea, .chat-form textarea {
+  background: var(--bg-panel-alt); color: var(--text-primary);
+  border: 1px solid var(--border-subtle); border-radius: 8px;
+  padding: 0.55rem 0.8rem; font: inherit; font-size: 0.88rem;
+}
+.select, .input-tabela, .dialogo textarea, .chat-form textarea {
+  transition: border-color var(--dur-fast) ease;
+}
+.select:focus, .dialogo textarea:focus, .chat-form textarea:focus { border-color: var(--cyan); outline: none; }
+.select { cursor: pointer; }
+.filtros { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.input-tabela {
+  width: 72px; background: var(--bg-panel-alt); color: var(--text-primary);
+  border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0.35rem 0.5rem;
+  font: inherit; font-size: 0.88rem;
+}
+.input-tabela:focus { border-color: var(--cyan); outline: none; }
+/* Sem as setinhas do campo numérico: visual mais limpo, digitação continua igual */
+.input-tabela::-webkit-inner-spin-button,
+.input-tabela::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.input-tabela[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+/* Célula que acabou de mudar de status ganha um realce que some sozinho */
+.realce { animation: realce 1.2s var(--ease-out); }
+@keyframes realce { from { background-color: rgb(var(--cyan-rgb) / 0.12); } }
+.input-obs { width: 100%; min-width: 160px; }
+
+.campo-erro { display: block; color: var(--perigo); font-size: 0.78rem; min-height: 1em; margin-top: 0.25rem; }
+.input-wrap.invalido { border-color: var(--perigo) !important; }
+.toggle-senha { background: none; border: none; cursor: pointer; font-size: 1rem; }
+
+.motivo { font-size: 0.75rem; color: var(--aviso); margin-top: 0.3rem; max-width: 220px; }
+.acoes { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+/* Diálogo (devolver lançamento) */
+.dialogo {
+  margin: auto; background: var(--bg-panel); color: var(--text-primary);
+  border: 1px solid var(--border-subtle); border-radius: 14px;
+  padding: 0; width: min(460px, 92vw);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  /* Modal fica centralizado: transform-origin no centro mesmo */
+  opacity: 1; transform: scale(1);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out),
+    overlay var(--dur-base) allow-discrete,
+    display var(--dur-base) allow-discrete;
+}
+/* Nunca de scale(0): começa quase do tamanho final */
+@starting-style {
+  .dialogo[open] { opacity: 0; transform: scale(0.96); }
+}
+.dialogo:not([open]) { opacity: 0; transform: scale(0.96); transition-duration: var(--dur-fast); }
+
+.dialogo::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+  transition: opacity var(--dur-base) ease, overlay var(--dur-base) allow-discrete, display var(--dur-base) allow-discrete;
+}
+@starting-style { .dialogo[open]::backdrop { opacity: 0; } }
+.dialogo:not([open])::backdrop { opacity: 0; }
+.dialogo form { padding: var(--space-md); }
+.dialogo h2 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+.dialogo textarea { width: 100%; resize: vertical; }
+.dialogo-acoes { display: flex; justify-content: flex-end; gap: 0.5rem; }
+
+/* Boletim do responsável */
+.boletim { margin-bottom: var(--space-lg); }
+.boletim-topo {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--space-sm); margin-bottom: var(--space-sm);
+}
+.boletim-topo h2 { font-size: 1.15rem; }
+
+/* Comunicação */
+.chat-shell { height: min(640px, calc(100vh - 220px)); min-height: 420px; }
+.chat-list { overflow-y: auto; }
+.chat-item {
+  display: block; width: 100%; text-align: left; position: relative;
+  background: none; border: none; border-bottom: 1px solid var(--border-subtle);
+  color: inherit; font: inherit;
+}
+.chat-item-topo { display: flex; justify-content: space-between; gap: 0.5rem; }
+.chat-item .hora { color: var(--text-muted); font-size: 0.75rem; }
+.chat-item .sub { display: block; color: var(--text-muted); font-size: 0.75rem; }
+.chat-item .preview { display: block; padding-right: 1.8rem; }
+.chat-item .contador {
+  position: absolute; right: var(--space-md); bottom: 0.9rem;
+  background: var(--gradient-accent); color: var(--sobre-destaque); font-size: 0.7rem; font-weight: 700;
+  border-radius: 999px; min-width: 1.3rem; padding: 0.05rem 0.4rem; text-align: center;
+}
+.chat-window { min-height: 0; padding: 0; }
+.chat-vazio { color: var(--text-secondary); margin: auto; padding: var(--space-md); text-align: center; }
+.chat-topo {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--border-subtle);
+}
+.chat-topo small { display: block; }
+.chat-topo .voltar { display: none; }
+.chat-mensagens { flex: 1; overflow-y: auto; padding: var(--space-md); display: flex; flex-direction: column; }
+.chat-window .msg { word-wrap: break-word; }
+.msg-texto { white-space: pre-wrap; }
+.msg-hora { display: block; font-size: 0.68rem; opacity: 0.7; margin-top: 0.25rem; text-align: right; }
+.chat-form { display: flex; gap: 0.5rem; padding: var(--space-sm) var(--space-md) 0; border-top: 1px solid var(--border-subtle); }
+.chat-form textarea {
+  flex: 1; resize: none;
+  field-sizing: content; /* cresce conforme o texto (navegadores recentes) */
+  min-height: 2.6rem; max-height: 8rem;
+}
+.chat-list, .chat-mensagens { scrollbar-width: thin; scrollbar-color: var(--border-subtle) transparent; overscroll-behavior: contain; }
+.chat-window > .campo-erro { padding: 0 var(--space-md) var(--space-xs); }
+
+/* Página 404 */
+.pagina-404 {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center; gap: var(--space-sm); padding: var(--space-md);
+}
+.pagina-404 .logo { margin-bottom: var(--space-md); }
+.codigo-404 { font-size: clamp(4rem, 14vw, 7rem); font-weight: 800; line-height: 1; }
+.pagina-404 p { color: var(--text-secondary); }
+
+/* Barra superior + menu lateral no celular */
+.mobile-bar { display: none; }
+.botao-menu {
+  background: var(--bg-panel-alt); color: var(--text-primary);
+  border: 1px solid var(--border-subtle); border-radius: 8px;
+  font-size: 1.2rem; padding: 0.3rem 0.7rem; cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+
+  .mobile-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 50;
+    padding: 0.75rem var(--space-sm); background: var(--bg-panel);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .sidebar {
+    position: fixed; top: 57px; left: 0; bottom: 0; width: min(280px, 82vw); z-index: 40;
+    transform: translateX(-100%);
+    visibility: hidden;
+    /* Fechar é mais rápido que abrir */
+    transition: transform 200ms var(--ease-out), visibility 0s linear 200ms;
+  }
+  .sidebar.aberta {
+    transform: translateX(0);
+    visibility: visible;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.5);
+    /* Curva de gaveta estilo iOS */
+    transition: transform 320ms var(--ease-drawer), visibility 0s;
+  }
+
+  /* Fundo escurecido atrás do menu: tocar fora fecha */
+  .menu-fundo {
+    position: fixed; inset: 57px 0 0 0; z-index: 30;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0; pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+  .menu-fundo.visivel { opacity: 1; pointer-events: auto; }
+
+  /* iOS dá zoom em campos com fonte < 16px — evita o pulo de tela */
+  .select, .input-tabela, .chat-form textarea, .dialogo textarea, .field input { font-size: 16px; }
+
+  /* Áreas de toque maiores */
+  .btn-sm { min-height: 40px; padding: 0.5rem 1rem; }
+  .botao-menu { min-width: 44px; min-height: 40px; }
+
+  #toast-area { left: var(--space-sm); right: var(--space-sm); bottom: calc(var(--space-sm) + env(safe-area-inset-bottom)); align-items: stretch; }
+  .toast { max-width: none; }
+  .sidebar > .logo { display: none; }
+
+  .app-main { padding: var(--space-md) var(--space-sm); }
+  .app-topbar { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
+
+  /* Chat: mostra a lista OU a conversa */
+  .chat-shell { grid-template-columns: 1fr; height: calc(100dvh - 230px); }
+  .chat-shell .chat-window { display: none; }
+  .chat-shell.conversa-aberta .chat-list { display: none; }
+  .chat-shell.conversa-aberta .chat-window { display: flex; }
+  .chat-topo .voltar { display: inline-flex; }
+  .chat-window .msg { max-width: 85%; }
+
+  /* Tabelas viram "cartões" no celular */
+  .table-wrap table { min-width: 0; }
+  .table-wrap thead { display: none; }
+  .table-wrap tr { display: block; padding: 0.6rem 0; border-bottom: 1px solid var(--border-subtle); }
+  .table-wrap td { display: flex; justify-content: space-between; align-items: center; gap: 1rem; border: none; padding: 0.35rem 1rem; }
+  .table-wrap td[data-rotulo]::before { content: attr(data-rotulo); color: var(--text-secondary); font-size: 0.78rem; }
+  .table-wrap td.td-estado { display: block; }
+  .input-obs { min-width: 0; width: 60%; }
+  .boletim-topo { flex-direction: column; align-items: flex-start; }
+}
+
+/* Impressão / "Salvar como PDF" do boletim */
+@media print {
+  body { background: #fff; color: #000; }
+  .sidebar, .mobile-bar, .app-topbar, .nao-imprimir, .cookie-banner, #toast-area,
+  [data-ciencia] { display: none !important; }
+  .app-shell { display: block; }
+  .table-wrap, .boletim { border-color: #ccc; background: #fff; break-inside: avoid; }
+  th, td { color: #000; border-color: #ccc; }
+  .texto-secundario { color: #333; }
+}
+
+/* Movimento reduzido: troca deslocamentos por fades curtos (não remove tudo) */
+@media (prefers-reduced-motion: reduce) {
+  .toast, .dialogo, .sidebar, .sidebar.aberta { transition-property: opacity, visibility; }
+  @starting-style { .toast { transform: none; } .dialogo[open] { transform: none; } }
+  .toast.saindo, .dialogo:not([open]) { transform: none; }
+  .btn:active:not(:disabled), a.stat-card:active { transform: none; }
+  .osso { animation: none; }
+}
+
+/* Botões que trocam de texto já nascem com espaço para o texto mais longo
+   ("Salvando...", "Validando...") — assim nada se mexe no clique */
+.btn[data-salvar], .btn[data-validar] { min-width: 6.8rem; }
+
+/* ==========================================================
+   Modelo MySQL — lançamento por disciplina, revisão, histórico
+   ========================================================== */
+
+/* Filtros com rótulo visível (turma, disciplina, bimestre) */
+.filtros-lancamento { margin-bottom: var(--space-sm); }
+.campo-filtro { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.78rem; color: var(--text-secondary); }
+.campo-filtro .select { min-width: 190px; }
+
+/* Aviso da janela de digitação */
+.aviso {
+  border-radius: 10px; padding: 0.7rem 1rem; font-size: 0.86rem; margin-bottom: var(--space-md);
+  border: 1px solid var(--border-subtle); background: var(--bg-panel);
+}
+.aviso-ok { border-color: rgb(var(--cyan-rgb) / 0.4); color: var(--cyan); }
+.aviso-fechado { border-color: rgb(var(--aviso-rgb) / 0.4); color: var(--aviso); }
+
+/* Lista de cartões (lançamentos e fila de revisão) */
+.lista-cartoes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: var(--space-md); }
+.lista-cartoes > .estado { grid-column: 1 / -1; }
+.cartao {
+  background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius);
+  padding: var(--space-md); display: flex; flex-direction: column; gap: 0.9rem;
+}
+.cartao-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-sm); }
+.cartao-titulo { font-size: 1rem; }
+.cartao-acoes { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: auto; }
+.cartao-acoes .campo-erro { margin-right: auto; flex-basis: 100%; text-align: left; }
+.celula-status { border-radius: 999px; }
+
+.lanc-campos { display: flex; gap: var(--space-sm); }
+.lanc-campo { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.78rem; color: var(--text-secondary); }
+.lanc-campo .input-tabela { width: 96px; font-size: 1rem; padding: 0.45rem 0.6rem; }
+.lanc-descricao textarea {
+  width: 100%; resize: vertical; min-height: 3.2rem; field-sizing: content; max-height: 12rem;
+  background: var(--bg-panel-alt); color: var(--text-primary); border: 1px solid var(--border-subtle);
+  border-radius: 8px; padding: 0.55rem 0.7rem; font: inherit; font-size: 0.9rem;
+  transition: border-color var(--dur-fast) ease;
+}
+.lanc-descricao textarea:focus { border-color: var(--cyan); outline: none; }
+.cartao .invalido { border-color: var(--perigo) !important; }
+.cartao :disabled { opacity: 0.7; cursor: not-allowed; }
+
+.motivo-box {
+  font-size: 0.84rem; color: var(--aviso); background: rgb(var(--aviso-rgb) / 0.08);
+  border: 1px solid rgb(var(--aviso-rgb) / 0.25); border-radius: 8px; padding: 0.55rem 0.75rem;
+}
+
+/* Chips de tags: alternam com toque (aria-pressed) */
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; }
+.chip {
+  font: inherit; font-size: 0.76rem; padding: 0.3rem 0.7rem; border-radius: 999px;
+  border: 1px solid var(--border-subtle); background: transparent; color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease,
+              color var(--dur-fast) ease, transform var(--dur-press) var(--ease-out);
+}
+.chip:active:not(:disabled) { transform: scale(0.96); }
+.chip[aria-pressed="true"] { background: rgb(var(--cyan-rgb) / 0.14); border-color: rgb(var(--cyan-rgb) / 0.55); color: var(--cyan); }
+.chip[aria-pressed="true"]::before { content: "✓ "; }
+.chip-estatico { cursor: default; background: var(--bg-panel-alt); }
+@media (hover: hover) and (pointer: fine) {
+  .chip:hover:not(:disabled):not(.chip-estatico) { border-color: var(--cyan); color: var(--text-primary); }
+}
+
+/* Revisão */
+.metricas { display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; }
+.metricas dt { font-size: 0.72rem; color: var(--text-secondary); }
+.metricas dd { font-weight: 600; font-variant-numeric: tabular-nums; }
+.parecer { font-size: 0.9rem; line-height: 1.55; color: var(--text-primary); }
+.nota-baixa { color: var(--perigo); }
+.destaque { color: var(--cyan); font-weight: 600; }
+
+/* Boletim */
+.bimestre-titulo { font-size: 0.85rem; color: var(--text-secondary); margin: var(--space-md) 0 0.5rem; letter-spacing: 0.02em; }
+.celula-parecer { max-width: 420px; font-size: 0.86rem; line-height: 1.5; }
+.celula-parecer .chips { margin-top: 0.45rem; }
+.celula-ciencia { min-width: 150px; }
+.retorno { font-size: 0.76rem; color: var(--text-secondary); margin-top: 0.35rem; font-style: italic; }
+
+/* Diálogo do histórico */
+.dialogo-largo { width: min(620px, 94vw); max-height: 86vh; }
+.dialogo-conteudo { padding: var(--space-md); display: flex; flex-direction: column; gap: var(--space-sm); max-height: 86vh; }
+.dialogo-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-sm); }
+
+/* Linha do tempo da auditoria */
+.linha-tempo { list-style: none; overflow-y: auto; padding-left: 0.4rem; scrollbar-width: thin; overscroll-behavior: contain; }
+.evento { position: relative; padding: 0 0 1rem 1.3rem; border-left: 2px solid var(--border-subtle); }
+.evento:last-child { border-left-color: transparent; padding-bottom: 0.2rem; }
+.evento::before {
+  content: ""; position: absolute; left: -6px; top: 0.3rem; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--bg-panel); border: 2px solid var(--text-secondary);
+}
+.evento-publicado::before { border-color: var(--cyan); background: var(--cyan); }
+.evento-devolvido::before { border-color: var(--aviso); }
+.evento-titulo { font-size: 0.9rem; }
+.evento-mudancas { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem; font-variant-numeric: tabular-nums; }
+.evento-obs {
+  font-size: 0.82rem; margin-top: 0.35rem; padding: 0.4rem 0.7rem; border-left: 3px solid var(--aviso);
+  background: var(--bg-panel-alt); border-radius: 0 6px 6px 0;
+}
+.evento-autor { font-size: 0.74rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+/* Painel: tags mais frequentes em barras */
+.tags-frequentes {
+  display: flex; flex-direction: column; gap: 0.55rem; background: var(--bg-panel);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: var(--space-md);
+}
+.tag-barra { display: grid; grid-template-columns: minmax(120px, 200px) 1fr 2.5rem; align-items: center; gap: 0.8rem; font-size: 0.85rem; }
+.tag-trilho { height: 8px; border-radius: 999px; background: var(--bg-panel-alt); overflow: hidden; }
+.tag-preenchido { display: block; height: 100%; border-radius: inherit; background: var(--gradient-accent); }
+.tag-total { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.secao-titulo { margin-top: var(--space-lg); }
+.stats-row + section > .secao-titulo:first-child { margin-top: 0; }
+
+/* Cadastro: aceite LGPD */
+.aceite { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45; cursor: pointer; }
+.aceite input { margin-top: 0.2rem; accent-color: var(--cyan); width: 16px; height: 16px; flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .filtros-lancamento { flex-direction: column; align-items: stretch; }
+  .campo-filtro .select { min-width: 0; width: 100%; }
+  .lanc-campo .input-tabela { width: 100%; }
+  .lanc-campos > * { flex: 1; }
+  .tag-barra { grid-template-columns: 1fr 2.5rem; }
+  .tag-trilho { grid-column: 1 / -1; grid-row: 2; }
+  .celula-parecer { max-width: none; flex-direction: column; align-items: flex-start !important; }
+}
+
+@media print {
+  .celula-ciencia .btn { display: none !important; }
+  .chip, .chip-estatico { border-color: #ccc; color: #333; background: #fff; }
+}

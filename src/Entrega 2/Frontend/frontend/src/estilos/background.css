@@ -1,0 +1,88 @@
+/* ==========================================================
+   KFKA — background.css
+   Glow de fundo, corte diagonal, textura e animações
+   ========================================================== */
+
+/* Camada de fundo fixa: glow azul inferior-esquerdo + corte
+   diagonal ciano no canto superior-direito, como no protótipo */
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  bottom: -25vw;
+  left: -15vw;
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  background: radial-gradient(circle, rgba(59, 111, 214, 0.35) 0%, rgba(34, 201, 224, 0.12) 45%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* O "respirar" do brilho é decorativo: só nas páginas públicas (vistas poucas vezes).
+   Nas telas de trabalho, movimento constante no fundo distrai. */
+body.pagina-publica::before {
+  animation: glow-pulse 8s ease-in-out infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 260px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(135deg, transparent 49.3%, rgba(34, 201, 224, 0.55) 49.3%, rgba(34, 201, 224, 0.55) 50%, transparent 50.2%);
+  opacity: 0.6;
+}
+
+/* Todo conteúdo real fica acima da camada de fundo */
+.site-header, main, footer, .app-shell, .auth-shell {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+/* Textura de pontos, usada em seções escuras (ex: faixa "como funciona") */
+.dot-texture {
+  background-image: radial-gradient(rgba(154, 164, 189, 0.18) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Animação de entrada — um único momento orquestrado ao carregar a página */
+/* Entrada — só nas páginas públicas (home, login, cadastro), que são vistas poucas vezes.
+   As telas internas são abertas dezenas de vezes por dia: lá o conteúdo aparece sem animação. */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  animation: fade-in-up 400ms var(--ease-out) both;
+}
+
+/* Escalonamento curto (60 ms): cascata natural sem atrasar a leitura */
+.reveal-delay-1 { animation-delay: 60ms; }
+.reveal-delay-2 { animation-delay: 120ms; }
+.reveal-delay-3 { animation-delay: 180ms; }
+
+/* Movimento reduzido: menos movimento, não zero — mantém só o fade */
+@keyframes fade-in { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation-name: fade-in; }
+  body.pagina-publica::before { animation: none; }
+}
