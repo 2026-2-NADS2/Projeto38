@@ -1,0 +1,16 @@
+# MySQL 8 local para desenvolvimento.
+# Uso:  docker compose up -d   (depois: npm run db:setup)
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: kfka
+      TZ: America/Sao_Paulo
+    ports:
+      - "3306:3306"
+    volumes:
+      - kfka_mysql:/var/lib/mysql
+
+volumes:
+  kfka_mysql:

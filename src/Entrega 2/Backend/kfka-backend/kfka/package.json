@@ -1,0 +1,21 @@
+{
+  "name": "kfka-plataforma-escolar",
+  "version": "3.0.0",
+  "private": true,
+  "description": "KFKA — Plataforma de Acompanhamento Escolar (React + API Express + MySQL)",
+  "scripts": {
+    "postinstall": "npm --prefix backend install && npm --prefix frontend install --include=dev",
+    "dev": "npm --prefix backend run dev",
+    "dev:web": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix backend start",
+    "db:setup": "npm --prefix backend run db:setup",
+    "db:senhas": "npm --prefix backend run db:senhas",
+    "db:diagnostico": "npm --prefix backend run db:diagnostico",
+    "test": "npm --prefix backend test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
