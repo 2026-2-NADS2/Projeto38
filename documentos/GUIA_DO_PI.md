@@ -116,7 +116,7 @@ A equipe usou três ferramentas de IA: o **ChatGPT** (OpenAI), no planejamento i
 
 A declaração no modelo da FECAP está na seção 10.
 
-## 7. Participação humana, decisões e validações
+## 7. Decisões e validações
 
 As decisões que definiram o projeto foram da equipe. A IA executou boa parte da implementação a partir delas.
 
