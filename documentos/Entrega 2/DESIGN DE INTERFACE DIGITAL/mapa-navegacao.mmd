@@ -1,0 +1,88 @@
+flowchart TB
+  subgraph PUB["Páginas públicas"]
+    direction TB
+    INI["Início<br/>/"]
+    LOG["Login<br/>/login"]
+    CAD["Cadastro de responsável<br/>/cadastro"]
+    PRIV["Privacidade (LGPD)<br/>/privacidade"]
+    TER["Termos de uso<br/>/termos"]
+    RED["Redefinir senha<br/>/redefinir-senha?token="]
+    NF["Página não encontrada (404)<br/>qualquer outro endereço"]
+  end
+
+  INI -->|"Entrar / Acessar a plataforma"| LOG
+  INI -->|"Sou responsável"| CAD
+  INI --> PRIV
+  LOG <-->|"Cadastre-se / Entrar"| CAD
+  LOG -->|"Esqueceu sua senha?"| TER
+  LOG --> PRIV
+  CAD --> PRIV
+  RED -->|"nova senha gravada"| LOG
+  NF --> INI
+  NF --> LOG
+
+  LOG -->|"login conforme o perfil"| AUT{"Perfil do usuário"}
+  CAD -->|"conta criada"| AUT
+  AUT -->|"responsável cadastrado pela escola sem aceite"| ACE["Aceite dos termos (LGPD)<br/>/aceite"]
+  ACE --> PAI
+  AUT --> PAI
+
+  subgraph COM["Área logada — moldura comum (menu lateral por perfil)"]
+    direction TB
+    PAI["Painel<br/>/painel"]
+    PEN["Pendências<br/>/pendencias"]
+    CAL["Calendário<br/>/calendario"]
+    MUR["Mural de conversas<br/>/comunicacao"]
+    AJU["Ajuda e suporte (SAC)<br/>/ajuda"]
+    PER["Meu perfil<br/>/perfil"]
+    SAI["Sair → volta ao Login"]
+  end
+  PAI -->|"faixa de pendências"| PEN
+  PAI -->|"cartão Mensagens não lidas"| MUR
+
+  subgraph ADM["Coordenação (admin)"]
+    direction TB
+    REV["Revisão de boletins<br/>/revisao"]
+    JUS_A["Justificativas de faltas<br/>/justificativas"]
+    OCO_A["Ocorrências<br/>/ocorrencias"]
+    DOC_A["Documentos escolares<br/>/documentos"]
+    REL_A["Relatórios gerenciais + exportação CSV/XLSX<br/>/relatorios"]
+    AUD["Auditoria<br/>/auditoria"]
+    ALU["Alunos<br/>/alunos"]
+    PRO["Professores<br/>/professores"]
+    TUR["Turmas e disciplinas<br/>/turmas<br/>abas: Turmas · Disciplinas · Vínculos · Bimestres · Novo ano letivo · Áreas e tags"]
+  end
+
+  subgraph PRF["Professor(a)"]
+    direction TB
+    NOT["Notas e avaliações<br/>/notas"]
+    AUL["Aulas e frequência<br/>/aulas"]
+    ATI_P["Atividades<br/>/atividades"]
+    OCO_P["Ocorrências<br/>/ocorrencias"]
+    REL_P["Relatórios e retornos<br/>/relatorios"]
+  end
+
+  subgraph RES["Responsável"]
+    direction TB
+    BOL["Boletim escolar + PDF + ciência<br/>/boletim"]
+    ATI_R["Atividades<br/>/atividades"]
+    JUS_R["Justificativas de faltas<br/>/justificativas"]
+    DOC_R["Documentos escolares<br/>/documentos"]
+  end
+
+  DOCV["Documento (visualizar / PDF)<br/>/documentos/:id"]
+
+  COM -->|"menu da coordenação · atalho: Revisar lançamentos"| ADM
+  COM -->|"menu do professor · atalhos: Lançar notas, Registrar aula"| PRF
+  COM -->|"menu do responsável · atalho: Ver boletim"| RES
+  DOC_A --> DOCV
+  DOC_R --> DOCV
+
+  classDef pub fill:#e8eefb,stroke:#3b6fd6,color:#0f172a
+  classDef com fill:#e6f7fa,stroke:#0b6f9e,color:#0f172a
+  classDef adm fill:#eef2f8,stroke:#475467,color:#0f172a
+  classDef dec fill:#fff7e6,stroke:#8a5300,color:#0f172a
+  class INI,LOG,CAD,PRIV,TER,RED,NF pub
+  class PAI,PEN,CAL,MUR,AJU,PER,ACE com
+  class REV,JUS_A,OCO_A,DOC_A,REL_A,AUD,ALU,PRO,TUR,NOT,AUL,ATI_P,OCO_P,REL_P,BOL,ATI_R,JUS_R,DOC_R,DOCV adm
+  class AUT dec
