@@ -6,7 +6,7 @@
 
 Segundo o enunciado, o objetivo da Entrega 2 é a **subida do backend** do sistema, garantindo que ele esteja disponível e acessível, com a configuração do serviço de backend e a conexão com o banco de dados.
 
-Na Entrega 2, o backend da plataforma KFKA completa foi desenvolvido em **Node.js + Express**, conectado ao banco **MySQL** e executado como serviço em servidor local (`localhost`).
+Na Entrega 2, o backend da plataforma KFKA completa foi desenvolvido em **Node.js + Express**, conectado ao banco **MySQL**, executado como serviço em servidor local (`localhost`) e publicado na nuvem (Railway).
 
 ## Código
 
@@ -36,6 +36,15 @@ Backend: [`src/Entrega 2/Backend/kfka-backend/kfka/backend`](../../../src/Entreg
   - é usada em `src/routes/boletim.routes.js`.
 
 O restante do backend é organizado em **módulos**: funções exportadas por arquivo, no padrão do Node.js.
+
+## Backend na nuvem
+
+O backend está publicado no **Railway**, conectado a um banco MySQL também hospedado no Railway:
+
+- Teste de funcionamento: https://kfka-backend-production.up.railway.app/api/saude (a resposta mostra `"status": "ok"` e `"banco": "conectado"`)
+- Sistema completo (front-end + backend): https://kfka-alphatech.netlify.app
+
+Na primeira inicialização, o serviço criou o banco a partir dos scripts da pasta `database/`. As credenciais ficam nas variáveis de ambiente do Railway, fora do código.
 
 ## Como executar em servidor local
 
