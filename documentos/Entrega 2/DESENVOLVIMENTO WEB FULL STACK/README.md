@@ -34,6 +34,17 @@ Fluxo principal: **o professor registra → a coordenação revisa e publica →
 - **Coordenação:** revisa, devolve e publica os lançamentos; faz os cadastros da escola; gera relatórios com exportação para Excel.
 - **Responsável:** consulta o boletim publicado, baixa o PDF e confirma ciência.
 
+## Sistema publicado
+
+A aplicação está publicada, com front-end e back-end funcionando juntos em produção:
+
+| | Endereço |
+| --- | --- |
+| Site (front-end, Netlify) | https://kfka-alphatech.netlify.app |
+| API (back-end, Railway) — teste de funcionamento | https://kfka-backend-production.up.railway.app/api/saude |
+
+O banco MySQL também está no Railway. As credenciais (conexão com o banco, `JWT_SECRET`) ficam nas variáveis de ambiente das plataformas, fora do código-fonte. Os usuários de demonstração são os mesmos listados abaixo.
+
 ## Como executar localmente
 
 **Pré-requisitos:** Node.js 20+ e MySQL (pode ser o do XAMPP).
