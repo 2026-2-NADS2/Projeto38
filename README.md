@@ -25,6 +25,25 @@ Os professores registram o acompanhamento bimestral dos alunos, com descrição,
 
 **Fluxo principal:** professor registra → coordenação revisa e publica → família consulta.
 
+## 🌐 Acesse o projeto
+
+O sistema está publicado e pode ser acessado pelo navegador, no computador ou no celular:
+
+| | Endereço |
+| --- | --- |
+| Site (front-end) | https://kfka-alphatech.netlify.app |
+| API (teste de funcionamento) | https://kfka-backend-production.up.railway.app/api/saude |
+
+**Usuários de demonstração** (senha de todos: `Senha@123`):
+
+| Perfil | E-mail |
+| --- | --- |
+| Coordenação (administrador) | admin@kfka.edu.br |
+| Professor | carlos.menezes@kfka.edu.br |
+| Responsável | ana.ribeiro@email.com |
+
+**Onde está hospedado:** o front-end (React) está no Netlify; a API (Node.js + Express) e o banco MySQL estão no Railway. As senhas e chaves ficam nas variáveis de ambiente das plataformas, fora do código.
+
 ## 🧰 Tecnologias
 
 | Camada | Tecnologias |
